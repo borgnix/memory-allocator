@@ -11,11 +11,12 @@ typedef union header_t{
   struct small_object_t{
     void* next_page;
     uint32_t class;
+    void* free_block;
   } small_object;
 
   struct large_object_t{
-    void* next_page;  
-    uint32_t size; 
+    void* next_page;
+    uint32_t size;
   } large_object;
 } header_t;
 
@@ -38,7 +39,7 @@ static inline uint32_t divide_up(uint32_t n, uint32_t d){
 
 /* return the number of bitmaps for a class */
 static inline uint32_t bitmap_num(uint32_t class){
-  return divide_up(64 * (PAGE_SIZE - sizeof(header_t)), class_size(class) + 512);
+  return divide_up(PAGE_SIZE - sizeof(header_t), 64 * class_size(class) + 8);
 }
 
 /* return the starting address of bitmap block */

@@ -1,0 +1,3 @@
+* Memory Allocator
+A simple bibop-style memory allocator implemented with segregated free lists.
+Huge thanks to [[https://github.com/hghwng][@hghwng]] 's patient help and magnificent makefile.
